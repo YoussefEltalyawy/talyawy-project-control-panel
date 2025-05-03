@@ -71,8 +71,6 @@ export default {
 					'gray': '#8E9196',
 					'soft-gray': '#F1F0FB',
 					'dark': '#1A1F2C',
-					'beige': '#e2d1c3',
-					'cream': '#fdfcfb',
 				}
 			},
 			borderRadius: {
