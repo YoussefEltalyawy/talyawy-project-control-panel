@@ -10,9 +10,9 @@ const Index = () => {
   return (
     <DashboardLayout>
       <Tabs defaultValue="projects" className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="projects">Projects</TabsTrigger>
-          <TabsTrigger value="api">API & Implementation</TabsTrigger>
+        <TabsList className="bg-black/50">
+          <TabsTrigger value="projects" className="data-[state=active]:bg-talyawy-purple/20">Projects</TabsTrigger>
+          <TabsTrigger value="api" className="data-[state=active]:bg-talyawy-purple/20">API & Implementation</TabsTrigger>
         </TabsList>
         
         <TabsContent value="projects" className="space-y-6">
