@@ -12,7 +12,7 @@ const Index = () => {
       <Tabs defaultValue="projects" className="space-y-6">
         <TabsList>
           <TabsTrigger value="projects">Projects</TabsTrigger>
-          <TabsTrigger value="api">API Testing</TabsTrigger>
+          <TabsTrigger value="api">API & Implementation</TabsTrigger>
         </TabsList>
         
         <TabsContent value="projects" className="space-y-6">

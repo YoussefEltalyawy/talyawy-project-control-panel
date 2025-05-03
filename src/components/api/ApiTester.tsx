@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { checkProjectStatus } from "@/pages/api/project-status";
 import { ProjectStatusResponse } from "@/types/project";
+import { WebsiteLockDocs } from "@/components/locking/WebsiteLockDocs";
 
 export function ApiTester() {
   const [licenseKey, setLicenseKey] = useState("");
@@ -45,45 +47,58 @@ export function ApiTester() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>API Test Tool</CardTitle>
-        <CardDescription>
-          Test the public API endpoint with a license key
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Input
-            placeholder="Enter license key"
-            value={licenseKey}
-            onChange={(e) => setLicenseKey(e.target.value)}
-            className="flex-1"
-          />
-          <Button 
-            onClick={handleCheck}
-            disabled={!licenseKey.trim() || loading}
-          >
-            {loading ? "Checking..." : "Check Status"}
-          </Button>
-        </div>
-        
-        {result && (
-          <div className="mt-6 p-4 rounded-md bg-gray-50">
-            <h3 className="text-sm font-semibold mb-2">API Response:</h3>
-            <pre className="bg-black text-white p-4 rounded-md overflow-auto text-sm">
-              {JSON.stringify(result, null, 2)}
-            </pre>
-            <p className={`mt-4 font-medium ${getStatusColor()}`}>
-              Status: {result.status}
-              {result.message && <span className="block text-sm mt-1">{result.message}</span>}
-            </p>
-          </div>
-        )}
-      </CardContent>
-      <CardFooter className="text-xs text-muted-foreground">
-        In production, use: GET /api/project-status?license=YOUR_LICENSE_KEY
-      </CardFooter>
-    </Card>
+    <Tabs defaultValue="test">
+      <TabsList className="mb-4">
+        <TabsTrigger value="test">API Test</TabsTrigger>
+        <TabsTrigger value="implementation">Implementation</TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="test">
+        <Card>
+          <CardHeader>
+            <CardTitle>API Test Tool</CardTitle>
+            <CardDescription>
+              Test the public API endpoint with a license key
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Input
+                placeholder="Enter license key"
+                value={licenseKey}
+                onChange={(e) => setLicenseKey(e.target.value)}
+                className="flex-1"
+              />
+              <Button 
+                onClick={handleCheck}
+                disabled={!licenseKey.trim() || loading}
+              >
+                {loading ? "Checking..." : "Check Status"}
+              </Button>
+            </div>
+            
+            {result && (
+              <div className="mt-6 p-4 rounded-md bg-gray-50">
+                <h3 className="text-sm font-semibold mb-2">API Response:</h3>
+                <pre className="bg-black text-white p-4 rounded-md overflow-auto text-sm">
+                  {JSON.stringify(result, null, 2)}
+                </pre>
+                <p className={`mt-4 font-medium ${getStatusColor()}`}>
+                  Status: {result.status}
+                  {result.message && <span className="block text-sm mt-1">{result.message}</span>}
+                </p>
+              </div>
+            )}
+          </CardContent>
+          <CardFooter className="text-xs text-muted-foreground">
+            In production, use: GET /api/project-status?license=YOUR_LICENSE_KEY
+          </CardFooter>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="implementation">
+        <WebsiteLockDocs />
+      </TabsContent>
+    </Tabs>
   );
 }

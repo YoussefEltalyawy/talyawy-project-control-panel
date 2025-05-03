@@ -35,3 +35,22 @@ export async function checkProjectStatus(licenseKey: string): Promise<ProjectSta
     };
   }
 }
+
+// Add a function to handle GET parameters for API consumption
+export async function getProjectStatus(url: string, licenseKey: string): Promise<ProjectStatusResponse> {
+  try {
+    // In a real app, this would make a fetch call to your API
+    // const response = await fetch(`${url}/api/project-status?license=${licenseKey}`);
+    // const data = await response.json();
+    // return data;
+    
+    // For now, we'll directly use the checkProjectStatus function
+    return await checkProjectStatus(licenseKey);
+  } catch (error) {
+    console.error("Error fetching project status:", error);
+    return {
+      status: "error",
+      message: "An error occurred while checking project status"
+    };
+  }
+}
