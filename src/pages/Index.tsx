@@ -1,13 +1,30 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from "react";
+import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { DashboardStats } from "@/components/projects/DashboardStats";
+import { ProjectsTable } from "@/components/projects/ProjectsTable";
+import { ApiTester } from "@/components/api/ApiTester";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <DashboardLayout>
+      <Tabs defaultValue="projects" className="space-y-6">
+        <TabsList>
+          <TabsTrigger value="projects">Projects</TabsTrigger>
+          <TabsTrigger value="api">API Testing</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="projects" className="space-y-6">
+          <DashboardStats />
+          <ProjectsTable />
+        </TabsContent>
+        
+        <TabsContent value="api">
+          <ApiTester />
+        </TabsContent>
+      </Tabs>
+    </DashboardLayout>
   );
 };
 
